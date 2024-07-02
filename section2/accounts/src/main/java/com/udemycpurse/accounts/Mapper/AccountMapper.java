@@ -6,6 +6,7 @@ import com.udemycpurse.accounts.Entity.Accounts;
 public class AccountMapper {
 
     public static AccountDTO mapToAccountsDto(Accounts account, AccountDTO accountsDto) {
+        accountsDto.setCustomerId(account.getCustomerId());
         accountsDto.setAccountNumber(account.getAccountNumber());
         accountsDto.setAccountType(account.getAccountType());
         accountsDto.setBranchAddress(account.getBranchAddress());

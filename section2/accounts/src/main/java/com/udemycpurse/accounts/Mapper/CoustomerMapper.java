@@ -6,7 +6,7 @@ import com.udemycpurse.accounts.Entity.Customer;
 public class CoustomerMapper {
 
     public static CustomerDTO mapToCustomerDto(Customer customer, CustomerDTO customerDto) {
-        customerDto.setCoustomerId(customer.getCoustomerId());
+        customerDto.setCustomerId(customer.getCustomerId());
         customerDto.setName(customer.getName());
         customerDto.setEmail(customer.getEmail());
         customerDto.setMobileNumber(customer.getMobileNumber());
@@ -14,7 +14,7 @@ public class CoustomerMapper {
     }
 
     public static Customer mapToCustomer(CustomerDTO customerDto, Customer customer) {
-        customer.setCoustomerId(customerDto.getCoustomerId());
+        customer.setCustomerId(customerDto.getCustomerId());
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
         customer.setMobileNumber(customerDto.getMobileNumber());
