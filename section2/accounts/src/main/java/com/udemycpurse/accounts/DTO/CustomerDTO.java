@@ -9,5 +9,5 @@ public class CustomerDTO  {
     private String name;
     private String email;
     private String mobileNumber;
-    private Accounts accounts;
+    private AccountDTO accounts;
 }

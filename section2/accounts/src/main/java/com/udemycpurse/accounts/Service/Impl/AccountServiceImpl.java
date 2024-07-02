@@ -9,6 +9,7 @@ import com.udemycpurse.accounts.Entity.Accounts;
 import com.udemycpurse.accounts.Entity.Customer;
 import com.udemycpurse.accounts.Exceptions.CustomerAlreadyExistException;
 import com.udemycpurse.accounts.Exceptions.RecourceNotFoundException;
+import com.udemycpurse.accounts.Mapper.AccountMapper;
 import com.udemycpurse.accounts.Mapper.CoustomerMapper;
 import com.udemycpurse.accounts.Service.IAccountService;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,7 @@ public class AccountServiceImpl implements IAccountService
         Customer customer= customerDAO.findBymobileNumber(mobileNumber).orElseThrow(()-> new RecourceNotFoundException("Customer","MobileNumber",mobileNumber));
         Accounts account= accountDAO.findBycustomerId(customer.getCustomerId()).orElseThrow(()-> new RecourceNotFoundException("Account","customer id",customer.getCustomerId().toString()));
         CustomerDTO customerdto=CoustomerMapper.mapToCustomerDto(customer,new CustomerDTO());
-        customerdto.setAccounts(account);
+        customerdto.setAccounts(AccountMapper.mapToAccountsDto(account,new AccountDTO()));
         return customerdto;
     }
 

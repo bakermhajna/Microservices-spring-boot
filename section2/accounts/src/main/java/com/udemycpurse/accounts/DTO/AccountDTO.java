@@ -7,7 +7,7 @@ import lombok.*;
 @Data
 public class AccountDTO  {
 
-    private Long coustomerId;
+    private Long customerId;
     private Long accountNumber;
     private String accountType;
     private String branchAddress;
