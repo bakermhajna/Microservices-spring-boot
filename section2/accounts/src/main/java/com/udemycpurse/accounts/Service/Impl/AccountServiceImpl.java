@@ -78,6 +78,20 @@ public class AccountServiceImpl implements IAccountService
         return  isUpdated;
     }
 
+    /**
+     * @param mobileNumber - Input Mobile Number
+     * @return boolean indicating if the delete of Account details is successful or not
+     */
+    @Override
+    public boolean deleteAccount(String mobileNumber) {
+        Customer customer = customerDAO.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new RecourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        customerDAO.deleteByCustomerId(customer.getCustomerId());
+        customerDAO.deleteById(customer.getCustomerId());
+        return true;
+    }
+
     private Accounts createNewAccount(CustomerDTO customer) {
         Accounts newAccount = new Accounts();
         newAccount.setCustomerId(customer.getCustomerId());
