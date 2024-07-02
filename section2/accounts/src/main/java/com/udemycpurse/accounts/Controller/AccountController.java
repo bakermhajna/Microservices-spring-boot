@@ -1,18 +1,14 @@
 package com.udemycpurse.accounts.Controller;
 
 import com.udemycpurse.accounts.Constants.AccountsConstants;
-import com.udemycpurse.accounts.DTO.AccountDTO;
 import com.udemycpurse.accounts.DTO.CustomerDTO;
 import com.udemycpurse.accounts.DTO.ResponseDTO;
 import com.udemycpurse.accounts.Service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(path = "/accounts",produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -39,6 +35,20 @@ public class AccountController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(customerDTO);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateAccountDetails(@RequestBody CustomerDTO customerDto) {
+        boolean isUpdated = accountService.updateAccount(customerDto);
+        if(isUpdated) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDTO(AccountsConstants.STATUS_200, AccountsConstants.MESSAGE_200));
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDTO(AccountsConstants.STATUS_417, AccountsConstants.MESSAGE_417_UPDATE));
+        }
     }
 
 
