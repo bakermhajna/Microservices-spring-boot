@@ -3,7 +3,7 @@ import com.udemycpurse.accounts.Entity.Accounts;
 import com.udemycpurse.accounts.Entity.BaseEntity;
 import lombok.*;
 @Data
-public class CustomerDTO extends BaseEntity {
+public class CustomerDTO  {
 
     private Long customerId;
     private String name;

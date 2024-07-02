@@ -25,8 +25,6 @@ public class AccountController {
     public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO coustomerdto){
 
         System.out.println(coustomerdto);
-        coustomerdto.setCreatedAt(LocalDateTime.now());
-        coustomerdto.setCreatedBy("baker");
         accountService.createAccount(coustomerdto);
 
         return ResponseEntity
