@@ -2,14 +2,11 @@ package com.udemycpurse.accounts.Entity;
 
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter@Setter@ToString
