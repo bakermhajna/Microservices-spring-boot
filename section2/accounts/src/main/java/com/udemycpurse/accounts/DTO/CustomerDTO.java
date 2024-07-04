@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 public class CustomerDTO  {
 
-    @NotEmpty
+
     private Long customerId;
 
     @NotEmpty(message = "Name can not be a null or empty")
