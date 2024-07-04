@@ -4,22 +4,25 @@ import com.udemycpurse.accounts.Constants.AccountsConstants;
 import com.udemycpurse.accounts.DTO.CustomerDTO;
 import com.udemycpurse.accounts.DTO.ResponseDTO;
 import com.udemycpurse.accounts.Service.IAccountService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/accounts",produces = {MediaType.APPLICATION_JSON_VALUE})
+@Validated
 public class AccountController {
 
     @Autowired
     private IAccountService accountService;
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO coustomerdto){
+    public ResponseEntity<ResponseDTO> createAccount(@Valid @RequestBody CustomerDTO coustomerdto){
 
         System.out.println(coustomerdto);
         accountService.createAccount(coustomerdto);
@@ -31,7 +34,9 @@ public class AccountController {
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<CustomerDTO> fetchAccountDeatils(@RequestParam String mobileNumber){
+    public ResponseEntity<CustomerDTO> fetchAccountDeatils(@RequestParam
+                                                               @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                               String mobileNumber){
         CustomerDTO customerDTO=accountService.fetchAccount(mobileNumber);
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -39,7 +44,7 @@ public class AccountController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseDTO> updateAccountDetails(@RequestBody CustomerDTO customerDto) {
+    public ResponseEntity<ResponseDTO> updateAccountDetails(@Valid @RequestBody CustomerDTO customerDto) {
         boolean isUpdated = accountService.updateAccount(customerDto);
         if(isUpdated) {
             return ResponseEntity
